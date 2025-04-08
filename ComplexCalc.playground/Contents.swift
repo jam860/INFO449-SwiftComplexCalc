@@ -113,15 +113,41 @@ class Calculator {
         return (lhs.0 - rhs.0, lhs.1 - rhs.1)
     }
     
-    func add(lhs: [String: Int], rhs: [String: Int]) -> [String? : Int?] {
-        var xPoint : Int = lhs["x"]! + rhs["x"]!;
-        var yPoint : Int = lhs["y"]! + rhs["y"]!;
-        return ["x": xPoint, "y": yPoint];
+    func add(lhs: [String: Int], rhs: [String: Int]) -> [String : Int] {
+        var xPoint = 0;
+        var yPoint = 0;
+        if let unwrappedXPointLeft = lhs["x"] {
+            xPoint += unwrappedXPointLeft
+        }
+        if let unwrappedXPointRight = rhs["x"] {
+            xPoint += unwrappedXPointRight
+        }
+        if let unwrappedYPointLeft = lhs["y"] {
+            yPoint += unwrappedYPointLeft
+        }
+        if let unwrappedYPointRight = rhs["y"] {
+            yPoint += unwrappedYPointRight
+        }
+
+        return ["x": xPoint,"y": yPoint];
     }
     
     func subtract(lhs: [String: Int], rhs: [String: Int]) -> [String : Int] {
-        var xPoint : Int = lhs["x"]! - rhs["x"]!;
-        var yPoint : Int = lhs["y"]! - rhs["y"]!;
+        var xPoint = 0;
+        var yPoint = 0;
+        if let unwrappedXPointLeft = lhs["x"] {
+            xPoint -= unwrappedXPointLeft
+        }
+        if let unwrappedXPointRight = rhs["x"] {
+            xPoint -= unwrappedXPointRight
+        }
+        if let unwrappedYPointLeft = lhs["y"] {
+            yPoint -= unwrappedYPointLeft
+        }
+        if let unwrappedYPointRight = rhs["y"] {
+            yPoint -= unwrappedYPointRight
+        }
+
         return ["x": xPoint,"y": yPoint];
     }
     
@@ -149,8 +175,8 @@ calc.multiply(lhs: 0, rhs: 1) == 0
 calc.avg([]) == 0;
 calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 - $1 }) == -6
 calc.mathOp(args: [], beg: 0, op: { $0 * $1 }) == 0;
-let pRyuji : [String: Int?] = ["x": nil, "y": nil];
-let pAnn = ["x": 1, "y": 1];
+//let pRyuji : [String: Int?] = ["x": nil, "y": nil];
+//let pAnn : [String: Int?] = ["x": 1, "y": 1];
 //calc.add(lhs: pRyuji, rhs: pAnn) == ["x": nil, "y": nil];
 
 //: ---
@@ -161,7 +187,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-//calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
