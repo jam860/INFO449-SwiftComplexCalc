@@ -139,18 +139,18 @@ class Calculator {
         var xPoint = 0;
         var yPoint = 0;
         if let unwrappedXPointLeft = lhs["x"] {
-            xPoint -= unwrappedXPointLeft
+            xPoint = unwrappedXPointLeft
         }
         if let unwrappedXPointRight = rhs["x"] {
             xPoint -= unwrappedXPointRight
         }
         if let unwrappedYPointLeft = lhs["y"] {
-            yPoint -= unwrappedYPointLeft
+            yPoint = unwrappedYPointLeft
         }
         if let unwrappedYPointRight = rhs["y"] {
             yPoint -= unwrappedYPointRight
         }
-
+        
         return ["x": xPoint,"y": yPoint];
     }
     
