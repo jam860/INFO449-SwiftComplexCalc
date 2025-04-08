@@ -42,6 +42,9 @@ class Calculator {
     }
     
     func divide(lhs : Int, rhs : Int) -> Int {
+        guard rhs != 0 else {
+            return 0;
+        }
         return lhs / rhs;
     }
     
@@ -169,16 +172,17 @@ let calc = Calculator()
 
 // ===== Your tests go here
 calc.add(lhs: -4, rhs: -4) == -8
-calc.subtract(lhs: -4, rhs: -8) == 4
 calc.add(lhs: 4, rhs: -8) == -4
+calc.subtract(lhs: -4, rhs: -8) == 4
 calc.multiply(lhs: 0, rhs: 1) == 0
+calc.multiply(lhs: -2, rhs: 4) == -8
+calc.divide(lhs: 0, rhs: 2) == 0;
+calc.divide(lhs: 4, rhs: 0) == 0;
 calc.avg([]) == 0;
+calc.count([-5]) == 1;
 calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 - $1 }) == -6
 calc.mathOp(args: [], beg: 0, op: { $0 * $1 }) == 0;
-//let pRyuji : [String: Int?] = ["x": nil, "y": nil];
-//let pAnn : [String: Int?] = ["x": 1, "y": 1];
-//calc.add(lhs: pRyuji, rhs: pAnn) == ["x": nil, "y": nil];
-
+calc.mathOp(args: [2, 2], beg: 20, op: { $0 / $1 }) == 5;
 //: ---
 //: ## Test code block
 //: Do not modify the code in this section
@@ -187,7 +191,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
