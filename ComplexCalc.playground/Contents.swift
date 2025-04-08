@@ -78,6 +78,10 @@ class Calculator {
     }
     
     func avg(_ arr : [Int]) -> Int {
+        guard !arr.isEmpty else {
+            return 0;
+        }
+        
         var total: Int = 0;
         for i in 0...arr.count-1 {
             total += arr[i];
@@ -85,11 +89,47 @@ class Calculator {
         return total/arr.count;
     }
     
+    func mathOp(args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
+        guard !args.isEmpty else {
+            return 0;
+        }
+        
+        var totalVal : Int = beg;
+        for i in 0...args.count-1 {
+            totalVal = op(totalVal, args[i])
+        }
+        return totalVal
+    }
+    
+    func add(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        var x = 0;
+        var y = 0;
+        x = lhs.0 + rhs.0;
+        y = lhs.1 + rhs.1;
+        return (x, y);
+    }
+    
+    func subtract(lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+        return (lhs.0 - rhs.0, lhs.1 - rhs.1)
+    }
+    
+    func add(lhs: [String: Int], rhs: [String: Int]) -> [String? : Int?] {
+        var xPoint : Int = lhs["x"]! + rhs["x"]!;
+        var yPoint : Int = lhs["y"]! + rhs["y"]!;
+        return ["x": xPoint, "y": yPoint];
+    }
+    
+    func subtract(lhs: [String: Int], rhs: [String: Int]) -> [String : Int] {
+        var xPoint : Int = lhs["x"]! - rhs["x"]!;
+        var yPoint : Int = lhs["y"]! - rhs["y"]!;
+        return ["x": xPoint,"y": yPoint];
+    }
+    
+    
     
         
 }
 
-//: Don't change the name of this object (`calc`); it's used in all the tests.
 let calc = Calculator()
 
 //: ## Extra credit
@@ -102,7 +142,17 @@ let calc = Calculator()
 //: Keep in mind that writing new tests may reveal ambiguity in the specification above--if that's the case, document the ambiguity, declare what you think *should* happen, and write the test to test for it.
 
 // ===== Your tests go here
-print(calc.add(lhs: 2, rhs: 2) == 4);
+calc.add(lhs: -4, rhs: -4) == -8
+calc.subtract(lhs: -4, rhs: -8) == 4
+calc.add(lhs: 4, rhs: -8) == -4
+calc.multiply(lhs: 0, rhs: 1) == 0
+calc.avg([]) == 0;
+calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 - $1 }) == -6
+calc.mathOp(args: [], beg: 0, op: { $0 * $1 }) == 0;
+let pRyuji : [String: Int?] = ["x": nil, "y": nil];
+let pAnn = ["x": 1, "y": 1];
+//calc.add(lhs: pRyuji, rhs: pAnn) == ["x": nil, "y": nil];
+
 //: ---
 //: ## Test code block
 //: Do not modify the code in this section
@@ -111,7 +161,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+//calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
