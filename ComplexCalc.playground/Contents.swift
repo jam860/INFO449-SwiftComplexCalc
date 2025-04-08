@@ -28,6 +28,65 @@ print("Welcome back to the UW Calculator")
 //: IMPORTANT: If any tests are commented out, you will be graded a zero (0)! You should never be in the habit of eliminating tests to make the code pass.
 //:
 class Calculator {
+    
+    func add(lhs : Int, rhs : Int) -> Int {
+        return lhs + rhs;
+    }
+    
+    func subtract(lhs : Int, rhs : Int) -> Int {
+        return lhs - rhs;
+    }
+    
+    func multiply(lhs: Int, rhs : Int) -> Int {
+        return lhs * rhs
+    }
+    
+    func divide(lhs : Int, rhs : Int) -> Int {
+        return lhs / rhs;
+    }
+    
+    func mathOp(lhs : Int, rhs : Int, op : (Int, Int) -> Int) -> Int {
+        return op(lhs, rhs);
+    }
+    
+    func add(_ arr : [Int]) -> Int {
+        var count : Int = 0;
+        for i in 0...arr.count-1 {
+            count += arr[i];
+        }
+        return count;
+    }
+    
+    func multiply(_ arr : [Int]) -> Int {
+        var count : Int = 1;
+        for i in 0...arr.count-1 {
+            count *= arr[i];
+        }
+        return count;
+    }
+    
+    func count(_ arr : [Int]) -> Int {
+        if (arr.count == 0) {
+            return 0;
+        }
+        
+        var count: Int = 0;
+        for _ in 0...arr.count-1 {
+            count += 1;
+        }
+        return count;
+    }
+    
+    func avg(_ arr : [Int]) -> Int {
+        var total: Int = 0;
+        for i in 0...arr.count-1 {
+            total += arr[i];
+        }
+        return total/arr.count;
+    }
+    
+    
+        
 }
 
 //: Don't change the name of this object (`calc`); it's used in all the tests.
@@ -43,7 +102,7 @@ let calc = Calculator()
 //: Keep in mind that writing new tests may reveal ambiguity in the specification above--if that's the case, document the ambiguity, declare what you think *should* happen, and write the test to test for it.
 
 // ===== Your tests go here
-
+print(calc.add(lhs: 2, rhs: 2) == 4);
 //: ---
 //: ## Test code block
 //: Do not modify the code in this section
