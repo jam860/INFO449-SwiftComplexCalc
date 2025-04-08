@@ -174,6 +174,8 @@ let calc = Calculator()
 calc.add(lhs: -4, rhs: -4) == -8
 calc.add(lhs: 4, rhs: -8) == -4
 calc.subtract(lhs: -4, rhs: -8) == 4
+calc.subtract(lhs: 4, rhs: -8) == 12
+calc.subtract(lhs: -4, rhs: 8) == -12
 calc.multiply(lhs: 0, rhs: 1) == 0
 calc.multiply(lhs: -2, rhs: 4) == -8
 calc.divide(lhs: 0, rhs: 2) == 0;
